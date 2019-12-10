@@ -2,6 +2,7 @@ package com.ybs.bootlaunch.controller;
 
 import com.ybs.bootlaunch.model.AjaxResponse;
 import com.ybs.bootlaunch.model.Article;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,10 @@ public class ArticleRestController {
 
     //增加一篇Article ，使用POST方法
     // @RequestMapping(value = "/article", method = POST, produces = "application/json")
+    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
+    @ApiResponses({
+            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
+    })
     @PostMapping("/article")
     public AjaxResponse saveArticle(@RequestBody Article article) {
         //因为使用了lombok的Slf4j注解，这里可以直接使用log变量打印日志

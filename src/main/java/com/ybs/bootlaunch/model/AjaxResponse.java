@@ -1,5 +1,7 @@
 package com.ybs.bootlaunch.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -9,9 +11,11 @@ import lombok.Data;
  * @date 2019/12/9 23:49
  */
 
+@ApiModel
 @Data
 public class AjaxResponse {
 
+    @ApiModelProperty("是否请求成功")
     private boolean isok;   //请求是否处理成功
     private int code;          //请求响应状态码（200、400、500）
     private String message;  //请求结果描述信息
