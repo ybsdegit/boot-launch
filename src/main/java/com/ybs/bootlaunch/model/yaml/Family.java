@@ -25,7 +25,7 @@ import javax.validation.constraints.NotEmpty;
 public class Family {
 
 //    @Value("${family.family-name}")
-    @NotEmpty
+//    @NotEmpty
     private String familyName;
     private Father father;
     private Mother mother;
