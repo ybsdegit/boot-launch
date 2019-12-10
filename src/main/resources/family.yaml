@@ -1,0 +1,18 @@
+family:
+#  family-name: "happy \n family"
+  family-name: ENC(qGYb+XtwToTEDNKethcHkfJ4ciAaPYQt)
+  father:
+    name: zimug
+    age: 17
+  mother:
+    alias:
+      - lovly
+      - alice
+  child:
+    name: kobo
+    age: ${family.father.age:5b }
+    friends:
+      - hobby: football
+        sex: male
+      - hobby: basketball
+        sex: female

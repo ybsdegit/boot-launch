@@ -1,8 +1,11 @@
-server:
-  port: 8080
-
 spring:
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
+  profiles:
+    active: dev
 
+# 优先级：
+
+# 命令行传参的方式
+# java -jar spring-boot-profile.jar --spring.profiles.active=prod
+jasypt:
+  encryptor:
+    password: 123456
