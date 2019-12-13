@@ -1,17 +1,49 @@
 server:
-  port: 8088
-
+  port: 8080
+main:
+  allow-bean-definition-overriding: true
 spring:
+  main:
+    allow-bean-definition-overriding: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  datasource:
+    primary:
+      url: jdbc:mysql://112.126.101.188:3306/testdb1?serverTimezone=UTC&useSSL=false
+      username: root
+      password: mima
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    secondary:
+      url: jdbc:mysql://112.126.101.188:3306/testdb2?serverTimezone=UTC&useSSL=false
+      username: root
+      password: mima
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
-#    1. 一个家庭有爸爸、妈妈、孩子。
-#    2. 这个家庭有一个名字（family-name）叫做“happy family”
-#    3. 爸爸有名字(name)和年龄（age）两个属性
-#    4. 妈妈有两个别名
-#    5. 孩子除了名字(name)和年龄（age）两个属性，还有一个friends的集合
-#    6. 每个friend有两个属性：hobby(爱好)和性别(sex)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    show-sql: true
+
+  jta:
+    atomikos:
+      datasource:
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+      connectionfactory:
+        max-pool-size: 20
+        borrow-connection-timeout: 60
+
+
+
+
+
+
+
+
+
+
 
 family:
   family-name: "happy \n family"

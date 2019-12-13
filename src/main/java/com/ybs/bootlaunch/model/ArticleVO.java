@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor   // 无参构造函数
 @Data
 @Builder
-public class Article {
+public class ArticleVO {
     @JsonIgnore // 排除某个属性不做序列化与反序列化
     private Long id;
     private String author;
@@ -31,5 +31,6 @@ public class Article {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private java.util.Date createTime;
+
     private List<Reader> reader;
 }
