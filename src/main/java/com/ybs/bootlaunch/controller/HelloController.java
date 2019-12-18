@@ -18,7 +18,7 @@ public class HelloController {
     @RequestMapping("/hello")
     public Article hello(){
         Article article = new Article();
-        Article article1 = article.builder().id(3L).author("paulson").build();
+        Article article1 = article.builder().id("3L").author("paulson").build();
         log.info("测试一下" + article1);
         return article1;
     }

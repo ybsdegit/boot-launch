@@ -1,12 +1,22 @@
 package com.ybs.bootlaunch.controller;
 
+import com.ybs.bootlaunch.dao.ArticleDao;
 import com.ybs.bootlaunch.model.AjaxResponse;
 import com.ybs.bootlaunch.model.Article;
-import io.swagger.annotations.*;
+import com.ybs.bootlaunch.service.ArticleRestService;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -20,47 +30,52 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 @RequestMapping("/rest")
 public class ArticleRestController {
+    @Resource
+    ArticleRestService articleRestService;
+
+    @Resource
+    ArticleDao articleDao;
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
 
     //增加一篇Article ，使用POST方法
-    // @RequestMapping(value = "/article", method = POST, produces = "application/json")
-    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
-    @ApiResponses({
-            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
-    })
     @PostMapping("/article")
     public AjaxResponse saveArticle(@RequestBody Article article) {
         //因为使用了lombok的Slf4j注解，这里可以直接使用log变量打印日志
         log.info("saveArticle：{}",article);
+        articleDao.save(article);
         return  AjaxResponse.success(article);
     }
 
 
-    //删除一篇Article，使用DELETE方法，参数是id
-    @RequestMapping(value = "/article/{id}", method = DELETE, produces = "application/json")
-    public AjaxResponse deleteArticle(@PathVariable Long id) {
+    @DeleteMapping("/article/{id}")
+    public AjaxResponse deleteArticle(@PathVariable String id) {
         log.info("deleteArticle：{}",id);
+        articleDao.deleteById(id);
         return AjaxResponse.success(id);
     }
 
     //更新一篇Article，使用PUT方法，以id为主键进行更新
-    @RequestMapping(value = "/article/{id}", method = PUT, produces = "application/json")
-    public AjaxResponse updateArticle(@PathVariable Long id, @RequestBody Article article) {
-        article.setId(id);
+    @PutMapping("/article/{id}")
+    public AjaxResponse updateArticle(@PathVariable String id, @RequestBody Article article) {
         log.info("updateArticle：{}",article);
+        articleDao.save(article);
         return AjaxResponse.success(article);
     }
 
     //获取一篇Article，使用GET方法
-    @RequestMapping(value = "/article/{id}", method = GET, produces = "application/json")
-    public AjaxResponse getArticle(@PathVariable Long id) {
+    @GetMapping( "/article/{id}")
+    public AjaxResponse getArticle(@PathVariable String id) {
+        Optional<Article> article = articleDao.findById(id);
+        return AjaxResponse.success(article);
+    }
 
-        //使用lombok提供的builder构建对象
-        Article article1 = Article.builder()
-                .id(1L)
-                .author("zimug")
-                .content("spring boot 2.深入浅出")
-                .createTime(new Date())
-                .title("t1").build();
-        return AjaxResponse.success(article1);
+    @GetMapping( "/article")
+    public @ResponseBody  AjaxResponse getAll() {
+        List<Article> all = articleDao.findAll();
+        System.out.print(all);
+        return AjaxResponse.success(articleDao.findAll());
     }
 }

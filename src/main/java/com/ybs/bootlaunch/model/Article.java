@@ -7,7 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,19 +23,24 @@ import java.util.List;
  * @date 2019/12/9 22:40
  */
 
+@Document(collation = "article")
 @AllArgsConstructor  // 所有参数的构造函数
 @NoArgsConstructor   // 无参构造函数
 @Data
 @Builder
-public class Article {
-    @JsonIgnore // 排除某个属性不做序列化与反序列化
-    private Long id;
+public class Article implements Serializable {
+//    @Id
+    private String id;
+
+//    @Indexed
     private String author;
+
     private String title;
+
+    @Field("msgContent")  // 别名
     private String content;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @CreatedDate
     private java.util.Date createTime;
     private List<Reader> reader;
 }

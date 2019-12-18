@@ -2,10 +2,10 @@ package com.ybs.bootlaunch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
-@EnableSwagger2
 @SpringBootApplication
+@EnableMongoAuditing
 public class BootLaunchApplication {
 
     public static void main(String[] args) {
