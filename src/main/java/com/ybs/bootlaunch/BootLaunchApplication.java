@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@MapperScan(basePackages = {"com.ybs.bootlaunch.generator"})
+//@MapperScan(basePackages = {"com.ybs.bootlaunch.generator"})
 public class BootLaunchApplication {
 
     public static void main(String[] args) {

@@ -2,6 +2,8 @@ package com.ybs.bootlaunch.service;
 
 import com.ybs.bootlaunch.generator.testdb1.Article;
 import com.ybs.bootlaunch.generator.testdb1.ArticleMapper;
+import com.ybs.bootlaunch.generator.testdb2.Message;
+import com.ybs.bootlaunch.generator.testdb2.MessageMapper;
 import com.ybs.bootlaunch.model.ArticleVO;
 import com.ybs.bootlaunch.utils.DozerUtils;
 import org.dozer.Mapper;
@@ -19,12 +21,20 @@ public class ArticleMybatisRestService implements ArticleRestService {
     @Resource
     private ArticleMapper articleMapper;
 
+    @Resource
+    private MessageMapper messageMapper;
+
 
     //新增
     @Override
     public ArticleVO saveArticle(ArticleVO article) {
         Article articlePO = dozerMapper.map(article,Article.class);
         articleMapper.insert(articlePO);
+
+        Message message = new Message();
+        message.setName("curry");
+        message.setContent("厉害");
+        messageMapper.insert(message);
         return null;
     }
 
