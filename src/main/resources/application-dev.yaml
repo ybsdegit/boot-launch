@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8080
 
 spring:
   jackson:
@@ -18,3 +18,8 @@ spring:
 logging:
   level:
     com.zimug.bootlaunch: debug
+
+# 驼峰命名自动映射
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true

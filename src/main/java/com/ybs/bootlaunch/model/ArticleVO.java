@@ -21,8 +21,8 @@ import java.util.List;
 @NoArgsConstructor   // 无参构造函数
 @Data
 @Builder
-public class Article {
-    @JsonIgnore // 排除某个属性不做序列化与反序列化
+public class ArticleVO {
+//    @JsonIgnore // 排除某个属性不做序列化与反序列化
     private Long id;
     private String author;
     private String title;
